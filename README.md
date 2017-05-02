@@ -1,4 +1,4 @@
-﻿# LastPass Password and secure note import.
+# LastPass Password and secure note import.
 
 A PowerShell script defining LastPass records, that can be used to import Records into LastPass.
 
@@ -17,10 +17,12 @@ So I decided to build my own, with the following properties:
 
 An example:
 
-
+First load the Class definitions:
+```
 . .\Class-LastPassRecord.ps1
-
-'''
+```
+Then, create your first object based on the generic LastPassRecord object type:
+```
 $Rec1 = New-Object -TypeName LastPassRecord
 $Rec1.Name="My Generic LastPass record"
 $Rec1.UserName="BZanten"
@@ -31,7 +33,7 @@ $Rec1.Url="http://www.mynetwork.local"
 $Rec1.Extra="Extra informatie"
 $Rec1
 $Rec1   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 Now the data is in the clipboard.
 Use Chrome to import the data :
@@ -47,13 +49,12 @@ You can easily create multiple PowerShell objects and pipe them to ConvertTo-CSV
 To import other record types (Secure Notes) to LastPass:
 
 Always first import the Class into your session:
-'''
+```
 . .\Class-LastPassRecord.ps1
-'''
+```
 
 Then create a Generic Secure Note:
-
-'''
+```
 $Rec2 = New-Object -TypeName LPGeneric
 $Rec2.Name = "My Generic LastPass Secure Note"
 $Rec2.Fav=0
@@ -64,11 +65,10 @@ $Rec2.Grouping="AAA Test notities"
 # $Rec2.Url="http://www.mynetwork.local"
 $Rec2
 $Rec2   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Software License secure note:
-
-'''
+```
 $Rec3 = New-Object -TypeName LPSoftwareLicense
 $Rec3.Website = 'https://my.visualstudio.com/productkeys'
 $Rec3.LicenseKey='AAAAA-BBBBB-CCCCC-DDDDD-EEEEE'
@@ -77,10 +77,10 @@ $Rec3.Version = "v2013"
 $Rec3.Grouping="AAA Test notities"
 $Rec3
 $Rec3   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Passport secure note:
-'''
+```
 $Rec4 = New-Object -TypeName LPPassport
 $Rec4.Type="Paspoort"
 $Rec4.NameOnPassPort="B. v. Zanten"
@@ -96,10 +96,10 @@ $Rec4.Number=13
 $Rec4.Nationality="Nederlandse"
 $Rec4
 $Rec4   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Server secure note:
-'''
+```
 $Rec5 = New-Object -TypeName LPServer
 $Rec5.Hostname="Server1.mynetwork.local"
 $Rec5.UserName="MyNetwork\Administrator"
@@ -109,8 +109,10 @@ $Rec5.Name="My Test2 server username"
 $Rec5.Grouping="AAA Test notities"
 $Rec5
 $Rec5   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
+To create a Bank Account secure note:
+```
 $Rec6 = New-Object -TypeName LPBankAccount
 $Rec6.BankName='RaboBank'
 $Rec6.AccountType='Spaarrekening'
@@ -126,11 +128,10 @@ $Rec6.Name='My Bank account 1'
 $Rec6.Grouping='AAA Test notities'
 $Rec6
 $Rec6   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a CreditCard secure note:
-
-'''
+```
 $Rec7 = New-Object -TypeName LPCreditCard
 $Rec7.Name="My CreditCard"
 $Rec7.ExpirationDate='1 mar 2020'
@@ -144,11 +145,10 @@ $Rec7.StartDate='1 feb 2014'
 $Rec7.Type='RaboCard'
 $Rec7.UserName='BZanten'
 $Rec7   | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Database secure note:
-
-'''
+```
 $Rec8 = New-Object -TypeName LPDatabase
 $Rec8.Type="SQL Server"
 $Rec8.Hostname="SQLSVR001"
@@ -163,11 +163,10 @@ $Rec8.Name="My Database test"
 $Rec8.Grouping="AAA Test notities"
 $Rec8
 $Rec8  | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Drivers License secure note:
-
-'''
+```
 $Rec9 = New-Object -TypeName LPDriversLicense
 $Rec9.Number="NumberLic1"
 $Rec9.ExpirationDate="31 dec 2018"
@@ -188,11 +187,10 @@ $Rec9.Password="MyP@ssWr0d"
 $Rec9.Grouping="AAA Test notities"
 $Rec9
 $Rec9  | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create an Email Account secure note:
-
-'''
+```
 $Rec10 = New-Object -TypeName LPEmailAccount
 $Rec10.Server="Mail.mynetwork.local"
 $Rec10.Port=25
@@ -206,11 +204,10 @@ $Rec10.Name="My Email adres test server"
 $Rec10.Grouping="AAA Test notities"
 $Rec10
 $Rec10 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Health Insurance secure note:
-
-'''
+```
 $Rec11 = New-Object -TypeName LPHealthInsurance
 $Rec11.CompanyName="Dokter een"
 $Rec11.CompanyPhone="Tel 1234"
@@ -228,11 +225,10 @@ $Rec11.Name="My Doktersbehandeling"
 $Rec11.Grouping="AAA Test notities"
 $Rec11
 $Rec11 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Instant Messenger secure note:
-
-'''
+```
 $Rec12 = New-Object -TypeName LPInstantMessenger
 $Rec12.Type="Type"
 $Rec12.Server="Server"
@@ -244,11 +240,10 @@ $Rec12.Name="My Instant Messenger"
 $Rec12.Grouping="AAA Test notities"
 $Rec12
 $Rec12 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Insurance secure note:
-
-'''
+```
 $Rec13 = New-Object -TypeName LPInsurance
 $Rec13.Company="Company"
 $Rec13.PolicyType="Policy Type"
@@ -262,11 +257,10 @@ $Rec13.Name="My Insurance"
 $Rec13.Grouping="AAA Test notities"
 $Rec13
 $Rec13 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Membership secure note:
-
-'''
+```
 $Rec14 = New-Object -TypeName LPMembership
 $Rec14.Organization="Organisatie"
 $Rec14.MembershipNumber="Lidnummer"
@@ -281,11 +275,10 @@ $Rec14.Name='My Lidmaatschap'
 $Rec14.Grouping="AAA Test notities"
 $Rec14
 $Rec14 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a SSH Key secure note:
-
-'''
+```
 $Rec15 = New-Object -TypeName LPSSHKey
 $Rec15.BitStrength=256
 $Rec15.Format="AES"
@@ -299,11 +292,10 @@ $Rec15.Name='My SSH Key'
 $Rec15.Grouping="AAA Test notities"
 $Rec15
 $Rec15 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a Social Security secure note:
-
-'''
+```
 $Rec16 = New-Object -TypeName LPSocialSecurity
 $Rec16.Number="Nummer"
 $Rec16.Notes="Notitie Verzekering"
@@ -312,11 +304,10 @@ $Rec16.Name="My Social Security"
 $Rec16.Grouping="AAA Test notities"
 $Rec16
 $Rec16 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To create a WIFI Password secure note:
-
-'''
+```
 $Rec17 = New-Object -TypeName LPWiFiPassword
 $Rec17.SSID="SSID"
 $Rec17.ConnectionType="ConnectionType"
@@ -335,11 +326,14 @@ $Rec17.Grouping="AAA Test notities"
 $Rec17.UserName="BZanten"
 $Rec17
 $Rec17 | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
 
 To Export all these objects to CSV and put them in you clipboard:
 
-'''
+```
 @($Rec1,$Rec2,$Rec3,$Rec4,$Rec5,$Rec6,$Rec7,$Rec8,$Rec9,$Rec10,$Rec11,$Rec12,$Rec13,$Rec14,$Rec15,$Rec16,$Rec17) `
    | Select-Object -Property Url,UserName,Password,Extra,Name,Grouping,Fav | ConvertTo-Csv -NoTypeInformation | Clip
-'''
+```
+
+Note: in all these examples, the resulting CSV record(s) is/are copied to your clipboard.
+Use the information in the top of this article to copy & past the information in a Generic CSV record import using Chrome
